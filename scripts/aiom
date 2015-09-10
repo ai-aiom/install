@@ -1,0 +1,56 @@
+#!/bin/bash
+# chkconfig: - 57 75
+# description: aiom service
+
+start() {
+/usr/local/lib/gim/auth/bin/gim-auth start
+/usr/local/lib/gim/server-manager/bin/gim-server-manager start
+/usr/local/lib/gim/site/bin/gim-site start
+/usr/local/lib/gim/monitor/bin/gim-monitor start
+/usr/local/lib/gim/deploy/bin/gim-deploy start
+/usr/local/lib/tomcat/bin/catalina.sh start
+}
+
+stop() {
+ps -ef | grep catalina | grep -v grep | awk '{print $2}' | xargs kill -9
+/usr/local/lib/gim/auth/bin/gim-auth stop
+/usr/local/lib/gim/server-manager/bin/gim-server-manager stop
+/usr/local/lib/gim/site/bin/gim-site stop
+/usr/local/lib/gim/monitor/bin/gim-monitor stop
+/usr/local/lib/gim/deploy/bin/gim-deploy stop
+}
+
+status() {
+/usr/local/lib/gim/auth/bin/gim-auth status
+/usr/local/lib/gim/server-manager/bin/gim-server-manager status
+/usr/local/lib/gim/site/bin/gim-site status
+/usr/local/lib/gim/monitor/bin/gim-monitor status
+/usr/local/lib/gim/deploy/bin/gim-deploy status
+
+PID=`(ps -ef | grep catalina | grep -v grep | awk '{print $2}')`
+if [ "$PID" == "" ]; then
+	echo "AiOM tomcat is not running"
+else
+	echo "AiOM tomcat is running, PID is" "$PID"
+fi
+}
+
+# See how we were called.
+case "$1" in
+  start)
+start
+;;
+  status)
+status
+;;
+  stop)
+stop
+;;
+  restart)
+stop
+start
+;;
+  *)
+echo $"Usage: $0 {start|stop|status|restart}"
+exit 2
+esac
