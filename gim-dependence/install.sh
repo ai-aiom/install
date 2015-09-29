@@ -24,6 +24,7 @@ rpm -ivh mysql-5.1.73-5.el6_6.x86_64.rpm
 rpm -ivh perl-DBD-MySQL-4.013-3.el6.x86_64.rpm
 rpm -ivh mysql-server-5.1.73-5.el6_6.x86_64.rpm
 rpm -ivh rabbitmq-server-3.5.3-1.noarch.rpm
+rpm -ivh ganglia-gmond-3.7.1-2.el6.x86_64.rpm
 
 cp my.cnf /etc
 
