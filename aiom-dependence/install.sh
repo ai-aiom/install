@@ -21,4 +21,10 @@ rm -rf apache-tomcat-6.0.44.zip
 
 rm -rf $install_dir
 
+chkconfig iptables off
+chkconfig mysqld on
+chkconfig rabbitmq-server on
+chkconfig gmond on
+chkconfig gmetad on
+
 exit 0
