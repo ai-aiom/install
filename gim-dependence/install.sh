@@ -12,7 +12,10 @@ cd $install_dir
 tar -xzvf gim-dependence.tar.gz
 
 rm -rf /etc/yum.repos.d/*
-yum install -y *.rpm
+yum install -y mysql/*.rpm
+yum install -y rabbitmq/*.rpm
+yum install -y ganglia/*.rpm
+yum install -y xcat/*.rpm
 
 cp my.cnf /etc
 
@@ -26,6 +29,13 @@ rabbitmqctl add_vhost gim
 rabbitmqctl set_permissions -p gim gim '.*' '.*' '.*'
 
 mysql_secure_installation
+
+source /etc/profile.d/xcat.sh
+tabch key=master site.value=127.0.0.1
+tabch key=nameservers site.value=127.0.0.1
+tabch key=domain site.value=aiom
+tabch key=xcat passwd.username="root" passwd.password="123456"
+tabch key=system passwd.username="root" passwd.password="123456"
 
 rm -rf $install_dir
 
