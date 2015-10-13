@@ -38,7 +38,7 @@ tabch key=xcat passwd.username="root" passwd.password="123456"
 tabch key=system passwd.username="root" passwd.password="123456"
 
 sed -i 's/^Timeout.*/Timeout 600/' /etc/httpd/conf/httpd.conf
-service htttd restart
+service httpd restart
 
 rm -rf $install_dir
 
