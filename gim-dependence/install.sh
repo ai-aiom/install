@@ -30,6 +30,7 @@ rabbitmqctl set_permissions -p gim gim '.*' '.*' '.*'
 
 mysql_secure_installation
 
+# xcat 配置
 source /etc/profile.d/xcat.sh
 tabch key=master site.value=127.0.0.1
 tabch key=nameservers site.value=127.0.0.1
@@ -37,6 +38,10 @@ tabch key=domain site.value=aiom
 tabch key=xcat passwd.username="root" passwd.password="123456"
 tabch key=system passwd.username="root" passwd.password="123456"
 
+# dhcp 配置
+makedhcp -n
+
+# httpd 配置
 sed -i 's/^Timeout.*/Timeout 600/' /etc/httpd/conf/httpd.conf
 service httpd restart
 
